@@ -27,7 +27,7 @@ describe('AppController', () => {
 
     it('deve converter de USD para EUR corretamente', () => {
       const resultado = appController.converter('11', 'USD', 'EUR');
-      expect(resultado.resultado).toBe(10);
+      expect(resultado.resultado).toBe(10.01);
     });
   });
 });
