@@ -27,15 +27,11 @@ jobs:
       - name: Executar testes automatizados
         run: npm test
 
-  deploy:
-    needs: build-test
-    if: github.event_name == 'push'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Copiar código
-        uses: actions/checkout@v4
-
-      - name: Deploy no Render (Webhook)
-        run: |
-          # Aqui entra o comando de deploy (vamos configurar a URL do Render em breve)
-          echo "Deploy realizado com sucesso!"
+ deploy:
+  needs: build-test
+  if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+  runs-on: ubuntu-latest
+  steps:
+    - name: Acionar Deploy Automático no Render
+      run: |
+        curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
