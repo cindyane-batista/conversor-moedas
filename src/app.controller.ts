@@ -11,11 +11,23 @@ export class AppController {
     @Query('de') de: string,
     @Query('para') para: string,
   ) {
-    const resultado = this.appService.converter(Number(valor), de, para);
+    if (!valor || !de || !para) {
+      return {
+        erro: "Parâmetros incompletos.",
+        exemplo: "/converter?valor=100&de=USD&para=BRL"
+      };
+    }
+
+    const valorNumerico = Number(valor);
+    const moedaDe = de.toUpperCase();
+    const moedaPara = para.toUpperCase();
+
+    const resultado = this.appService.converter(valorNumerico, moedaDe, moedaPara);
+
     return {
-      valorOriginal: Number(valor),
-      de,
-      para,
+      valorOriginal: valorNumerico,
+      de: moedaDe,
+      para: moedaPara,
       resultado,
     };
   }
