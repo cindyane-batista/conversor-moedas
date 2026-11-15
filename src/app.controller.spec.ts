@@ -17,17 +17,17 @@ describe('AppController', () => {
   describe('converter', () => {
     it('deve converter de BRL para USD corretamente', () => {
       const resultado = appController.converter('10', 'BRL', 'USD');
-      expect(resultado.resultado).toBe(2);
+      expect(resultado.resultado).toBe(1.70);
     });
 
     it('deve converter de USD para BRL corretamente', () => {
       const resultado = appController.converter('10', 'USD', 'BRL');
-      expect(resultado.resultado).toBe(50);
+      expect(resultado.resultado).toBe(58.50);
     });
 
     it('deve converter de USD para EUR corretamente', () => {
       const resultado = appController.converter('11', 'USD', 'EUR');
-      expect(resultado.resultado).toBe(10.01);
+      expect(resultado.resultado).toBe(10.23);
     });
   });
 });

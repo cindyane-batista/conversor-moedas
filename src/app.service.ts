@@ -2,17 +2,16 @@ import { Injectable, BadRequestException } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
-  // Exemplo de taxas base fixas ou mockadas para os testes
+  // Taxas atualizadas para valores mais próximos da realidade
   private taxas: Record<string, Record<string, number>> = {
-    USD: { BRL: 5, EUR: 0.91, USD: 1 },
-    BRL: { USD: 0.2, EUR: 0.18, BRL: 1 },
-    EUR: { USD: 1.1, BRL: 5.5, EUR: 1 },
+    USD: { BRL: 5.85, EUR: 0.93, USD: 1 },
+    BRL: { USD: 0.17, EUR: 0.16, BRL: 1 },
+    EUR: { USD: 1.08, BRL: 6.30, EUR: 1 },
   };
 
   converter(valor: number, de: string, para: string): number {
     // Valida se as moedas são suportadas
     const moedasSuportadas = ['USD', 'BRL', 'EUR'];
-    
     if (!moedasSuportadas.includes(de) || !moedasSuportadas.includes(para)) {
       throw new BadRequestException(`Moeda não suportada. Use: ${moedasSuportadas.join(', ')}`);
     }
